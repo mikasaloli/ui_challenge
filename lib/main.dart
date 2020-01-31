@@ -34,39 +34,43 @@ class MyApp extends StatelessWidget {
           ],
         ),
         body: Container(
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left: 30,right: 10,bottom: 20),
-                  //   child: Text(
-                  //     '.',
-                  //     style:
-                  //         TextStyle(fontWeight: FontWeight.bold, fontSize: 40,color: Color(0xff162997)),
-                  //     textAlign: TextAlign.center,
-                  //   ),
-                  // ),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Text(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 30),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      height: 6.0,
+                      width: 6.0,
+                      decoration: new BoxDecoration(
+                        color: Color(0xff162997),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
                         '36.90 ETH',
-                           style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 35),
                       ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                        '/5 392 USD',
-                      ),
-                  ),
-                ],
-              ),
-              Text('test'),
-              Text('test'),
-            ],
+                    ),
+                    Text(
+                      ' /5 392 USD',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w200, fontSize: 20),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[Text("+2.54 ETH"), Text(" last month")],
+                ),
+                Text('test'),
+              ],
+            ),
           ),
         ),
       ),
