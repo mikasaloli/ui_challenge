@@ -1,5 +1,5 @@
 [{
-        "id": "1",
+        "id": 1,
         "category": "Technology",
         "image": [{
                 "url": "https://image.freepik.com/free-vector/abstract-colorful-flow-shapes-background_52683-21041.jpg"
@@ -11,12 +11,12 @@
         "title": "\"Flu Forecast\" - Future of Medicine",
         "detail": "Mini 3-axis, 4K /60fps, rotatable lens, wireless preview and remote control",
         "status": "85%",
-        "percent": 8.5,
+        "percent": 0.85,
         "fund": "1673.17",
         "dayleft": "15"
     },
     {
-        "id": "2",
+        "id": 2,
         "category": "Technology",
         "image": [{
                 "url": "https://image.freepik.com/free-vector/abstract-colorful-flow-shapes-background-design_23-2148237986.jpg"
@@ -28,7 +28,7 @@
         "title": "Winston - Take Back Control of Your Online",
         "detail": "Plug-n-play hardware filter that reclaims your use of the internet on",
         "status": "51%",
-        "percent": 5.1,
+        "percent": 0.51,
         "fund": "567.34",
         "dayleft": "32"
     }

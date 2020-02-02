@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_challenge/ui/screen/widget/card_widget.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
@@ -52,7 +55,7 @@ class MyApp extends StatelessWidget {
                             fontWeight: FontWeight.bold, fontSize: 20))
                   ],
                 ),
-                Slider(),
+                SlideCard(),
                 BottomContainer()
               ],
             ),
@@ -147,18 +150,121 @@ class TopContainer extends StatelessWidget {
   }
 }
 
-class Slider extends StatelessWidget {
+// class Slider extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return CarouselSlider(
+//       height: 450.0,
+//       items: [1, 2, 3, 4, 5].map((i) {
+//         return Builder(
+//           builder: (BuildContext context) {
+//             return SlideCard();
+//           },
+//         );
+//       }).toList(),
+//     );
+//   }
+// }
+
+// class Slider extends StatelessWidget {
+//   const Slider({Key key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: Center(
+//             // Use future builder and DefaultAssetBundle to load the local JSON file
+//             child: FutureBuilder(
+//                 future: DefaultAssetBundle
+//                     .of(context)
+//                     .loadString('data/project.json'),
+//                 builder: (context, snapshot) {
+//                   // Decode the JSON
+//                   var new_data = json.decode(snapshot.data.toString());
+
+//                   return ListView.builder(
+//                     // Build the ListView
+//                     itemBuilder: (BuildContext context, int index) {
+//                       return Card(
+//                         child: Column(
+//                           crossAxisAlignment: CrossAxisAlignment.stretch,
+//                           children: <Widget>[
+//                             Text("Name: " + new_data[index]['name']),
+//                             Text("Height: " + new_data[index]['height']),
+//                             Text("Mass: " + new_data[index]['mass']),
+//                             Text(
+//                                 "Hair Color: " + new_data[index]['hair_color']),
+//                             Text(
+//                                 "Skin Color: " + new_data[index]['skin_color']),
+//                             Text(
+//                                 "Eye Color: " + new_data[index]['eye_color']),
+//                             Text(
+//                                 "Birth Year: " + new_data[index]['birth_year']),
+//                             Text("Gender: " + new_data[index]['gender'])
+//                           ],
+//                         ),
+//                       );
+//                     },
+//                     itemCount: new_data == null ? 0 : new_data.length,
+//                   );
+//                 }),
+//           ),
+//     );
+//   }
+// }
+
+class Slider extends StatefulWidget {
+  @override
+  _SliderState createState() => _SliderState();
+}
+
+class _SliderState extends State<Slider> {
+  List properties;
+  int index = 0;
+
+  Future<void> loadJsonData() async {
+    var jsonText = await rootBundle.loadString("data/project.json");
+    setState(() {
+      properties = json.decode(jsonText);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadJsonData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
+    if (properties == null) {
+      return Container(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return Container(
+        child: CarouselSlider(
       height: 450.0,
-      items: [1, 2, 3, 4, 5].map((i) {
+      items: properties.map<Widget>((i) {
+       double test =i["percent"];
+       int id = i["id"];
         return Builder(
           builder: (BuildContext context) {
-            return SlideCard();
+            return SlideCard(
+              id: id,
+              title: i["title"],
+              category: i["category"],
+              detail: i["detail"],
+              status: i["status"],
+              percent: test,
+              fund: i["fund"],
+              dayleft:i["dayleft"],
+              image: i["image"][0]["url"],
+            );
           },
         );
       }).toList(),
-    );
+    ));
   }
 }
