@@ -213,58 +213,58 @@ class TopContainer extends StatelessWidget {
 //   }
 // }
 
-class Slider extends StatefulWidget {
-  @override
-  _SliderState createState() => _SliderState();
-}
+// class Slider extends StatefulWidget {
+//   @override
+//   _SliderState createState() => _SliderState();
+// }
 
-class _SliderState extends State<Slider> {
-  List properties;
-  int index = 0;
+// class _SliderState extends State<Slider> {
+//   List properties;
+//   int index = 0;
 
-  Future<void> loadJsonData() async {
-    var jsonText = await rootBundle.loadString("data/project.json");
-    setState(() {
-      properties = json.decode(jsonText);
-    });
-  }
+//   Future<void> loadJsonData() async {
+//     var jsonText = await rootBundle.loadString("data/project.json");
+//     setState(() {
+//       properties = json.decode(jsonText);
+//     });
+//   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    loadJsonData();
-  }
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     loadJsonData();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    if (properties == null) {
-      return Container(
-        child: CircularProgressIndicator(),
-      );
-    }
-    return Container(
-        child: CarouselSlider(
-      height: 450.0,
-      items: properties.map<Widget>((i) {
-       double test =i["percent"];
-       int id = i["id"];
-        return Builder(
-          builder: (BuildContext context) {
-            return SlideCard(
-              id: id,
-              title: i["title"],
-              category: i["category"],
-              detail: i["detail"],
-              status: i["status"],
-              percent: test,
-              fund: i["fund"],
-              dayleft:i["dayleft"],
-              image: i["image"][0]["url"],
-            );
-          },
-        );
-      }).toList(),
-    ));
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     if (properties == null) {
+//       return Container(
+//         child: CircularProgressIndicator(),
+//       );
+//     }
+//     return Container(
+//         child: CarouselSlider(
+//       height: 450.0,
+//       items: properties.map<Widget>((i) {
+//        double test =i["percent"];
+//        int id = i["id"];
+//         return Builder(
+//           builder: (BuildContext context) {
+//             return SlideCard(
+//               id: id,
+//               title: i["title"],
+//               category: i["category"],
+//               detail: i["detail"],
+//               status: i["status"],
+//               percent: test,
+//               fund: i["fund"],
+//               dayleft:i["dayleft"],
+//               image: i["image"][0]["url"],
+//             );
+//           },
+//         );
+//       }).toList(),
+//     ));
+//   }
+// }
