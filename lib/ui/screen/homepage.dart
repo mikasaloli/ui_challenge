@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
                             fontWeight: FontWeight.bold, fontSize: 20))
                   ],
                 ),
-                SlideCard(),
+                Slider(),
                 BottomContainer()
               ],
             ),
@@ -213,58 +213,64 @@ class TopContainer extends StatelessWidget {
 //   }
 // }
 
-// class Slider extends StatefulWidget {
-//   @override
-//   _SliderState createState() => _SliderState();
-// }
+class Slider extends StatefulWidget {
+  @override
+  _SliderState createState() => _SliderState();
+}
 
-// class _SliderState extends State<Slider> {
-//   List properties;
-//   int index = 0;
+class _SliderState extends State<Slider> {
+  List cardList;
+  int index = 0;
 
-//   Future<void> loadJsonData() async {
-//     var jsonText = await rootBundle.loadString("data/project.json");
-//     setState(() {
-//       properties = json.decode(jsonText);
-//     });
-//   }
+  Future<void> loadJsonData() async {
+    var jsonText = await rootBundle.loadString("data/project.json");
+    setState(() {
+      cardList = json.decode(jsonText);
+    });
+  }
 
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     loadJsonData();
-//   }
+  @override
+  void initState() {
+    super.initState();
+    loadJsonData();
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     if (properties == null) {
-//       return Container(
-//         child: CircularProgressIndicator(),
-//       );
-//     }
-//     return Container(
-//         child: CarouselSlider(
-//       height: 450.0,
-//       items: properties.map<Widget>((i) {
-//        double test =i["percent"];
-//        int id = i["id"];
-//         return Builder(
-//           builder: (BuildContext context) {
-//             return SlideCard(
-//               id: id,
-//               title: i["title"],
-//               category: i["category"],
-//               detail: i["detail"],
-//               status: i["status"],
-//               percent: test,
-//               fund: i["fund"],
-//               dayleft:i["dayleft"],
-//               image: i["image"][0]["url"],
-//             );
-//           },
-//         );
-//       }).toList(),
-//     ));
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    if (cardList == null) {
+      return Container(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return CarouselSlider(
+      enableInfiniteScroll:false,
+      height: 450.0,
+      items: cardList.map<Widget>((i) {
+        double percent = i["percent"];
+        int id = i["id"];
+        String title = i["title"];
+        String category = i["category"];
+        String detail = i["detail"];
+        String status = i["status"];
+        String fund = i["fund"];
+        String dayleft = i["dayleft"];
+        String image = i["image"][0]["url"];
+        return Builder(
+          builder: (BuildContext context) {
+            return SlideCard(
+              id: id,
+              title: title,
+              category: category,
+              detail: detail,
+              status: status,
+              percent: percent,
+              fund: fund,
+              dayleft: dayleft,
+              image: image,
+            );
+          },
+        );
+      }).toList(),
+    );
+  }
+}

@@ -11,6 +11,7 @@ class TextPaddingTop extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: paddingvalue),
       child: Text(text,
+      maxLines: 2,
           style: TextStyle(fontWeight: fontWeightvalue?? FontWeight.normal, fontSize: fontsizevalue)),
     );
   }

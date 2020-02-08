@@ -5,6 +5,25 @@ import 'package:ui_challenge/ui/screen/widget/paddingText_widget.dart';
 import 'package:ui_challenge/ui/screen/widget/text_category_widget.dart';
 
 class SlideCard extends StatelessWidget {
+  final int id;
+  final String title;
+  final String category;
+  final String detail;
+  final String status;
+  final double percent;
+  final String fund;
+  final String dayleft;
+  final String image;
+  SlideCard(
+      {this.id,
+      this.title,
+      this.category,
+      this.detail,
+      this.status,
+      this.percent,
+      this.fund,
+      this.dayleft,
+      this.image});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -12,10 +31,10 @@ class SlideCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => DetailPage(
+              builder: (context) => new DetailPage(
                   image:
-                      "https://image.freepik.com/free-vector/abstract-colorful-flow-shapes-background_52683-21041.jpg",
-                  id: 1)),
+                      image,
+                  id: id)),
         );
       },
       child: Card(
@@ -26,8 +45,8 @@ class SlideCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Hero(
-              tag: 1,
+            new Hero(
+              tag: id,
               child: ClipRRect(
                 borderRadius: BorderRadius.only(
                     topLeft: const Radius.circular(10),
@@ -35,11 +54,11 @@ class SlideCard extends StatelessWidget {
                 child: Image(
                   fit: BoxFit.contain,
                   image: NetworkImage(
-                      'https://image.freepik.com/free-vector/abstract-colorful-flow-shapes-background_52683-21041.jpg'),
+                      image),
                 ),
               ),
             ),
-            Detail()
+            Detail(category: category,title: title,percent: percent,dayleft: dayleft,image: image,fund: fund,status: status,detail: detail,)
           ],
         ),
       ),
@@ -48,6 +67,15 @@ class SlideCard extends StatelessWidget {
 }
 
 class Detail extends StatelessWidget {
+  final String category;
+  final String title;
+  final String detail;
+  final double percent;
+  final String fund;
+  final String dayleft;
+  final String image;
+  final String status;
+  Detail({this.category,this.title,this.percent,this.dayleft,this.image,this.fund,this.detail,this.status});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -57,10 +85,10 @@ class Detail extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextCategory(
-            text: "Technology",
+            text: category,
           ),
           TextPaddingTop(
-            text: '"Flu Forecast" - Future of Medicine',
+            text: title,
             fontsizevalue: 23,
             paddingvalue: 10,
             fontWeightvalue: FontWeight.bold,
@@ -70,13 +98,13 @@ class Detail extends StatelessWidget {
               paddingvalue: 10,
               fontWeightvalue: FontWeight.w200,
               text:
-                  "Mini 3-axis, 4K /60fps, rotatable lens, wireless preview and remote control..."),
+                  detail),
           DetailLine(
-            topLeft: "85%",
-            topRight: "1 673.17 ETH",
-            bottomLeft: "15 day left",
+            topLeft: status,
+            topRight: fund+" ETH",
+            bottomLeft: dayleft+" day left",
             bottomRight: "Collected",
-            percent: 0.85,
+            percent: percent,
             withIcon: true,
           )
         ],
