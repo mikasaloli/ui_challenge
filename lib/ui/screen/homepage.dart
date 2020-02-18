@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_challenge/constants.dart';
 import 'package:ui_challenge/ui/screen/widget/card_widget.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xffF9F9FB),
+          backgroundColor: AppColors.Background_COLOR,
           elevation: 0.0,
           leading: IconButton(
             icon: Icon(
@@ -37,26 +38,16 @@ class MyApp extends StatelessWidget {
           ],
         ),
         body: Container(
-          color: Color(0xffF9F9FB),
+          color: AppColors.Background_COLOR,
           child: Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                TopContainer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text("Popular project",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    Text("- ALL",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20))
-                  ],
-                ),
-                Slider(),
-                BottomContainer()
+                Wallet(),// ສ່ວນສະແດງຜົນເງິນ (ໂຕທໍາອິດ)
+                Category(), //ສ່ວນສະແດງຜົນຫົວຂໍ້ (ໂຕທີສອງ)
+                Slider(), //ສ່ວນສະແດງຜົນcard ທີ່ເລື່ອນໄປມາ (ໂຕທີສາມ)
+                Investment()//ສ່ວນສະແດງຜົນ ຈໍານວນໂຄງການທີ່ໄດ້ລົງທຶນ (ໂຕສຸດທ້າຍ)
               ],
             ),
           ),
@@ -66,7 +57,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class BottomContainer extends StatelessWidget {
+class Investment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -78,7 +69,7 @@ class BottomContainer extends StatelessWidget {
             "Your investment",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
-          new FloatingActionButton(
+          new RawMaterialButton(
             onPressed: () {},
             child: Text(
               "3",
@@ -89,7 +80,7 @@ class BottomContainer extends StatelessWidget {
             ),
             shape: new CircleBorder(),
             elevation: 0.0,
-            backgroundColor: Colors.grey[200],
+            fillColor: Colors.grey[200],
           ),
         ],
       ),
@@ -97,7 +88,7 @@ class BottomContainer extends StatelessWidget {
   }
 }
 
-class TopContainer extends StatelessWidget {
+class Wallet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -109,7 +100,7 @@ class TopContainer extends StatelessWidget {
               height: 6.0,
               width: 6.0,
               decoration: new BoxDecoration(
-                color: Color(0xff162997),
+                color: AppColors.PRIMARY_COLOR,
                 shape: BoxShape.circle,
               ),
             ),
@@ -127,7 +118,7 @@ class TopContainer extends StatelessWidget {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 15),
+          padding: const EdgeInsets.only(left: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -136,7 +127,7 @@ class TopContainer extends StatelessWidget {
                   '+2.54 ETH',
                   style: TextStyle(color: Colors.white),
                 ),
-                backgroundColor: Color(0xff162997),
+                backgroundColor: AppColors.PRIMARY_COLOR,
               ),
               Text(
                 "  last month",
@@ -150,6 +141,20 @@ class TopContainer extends StatelessWidget {
   }
 }
 
+class Category extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text("Popular project",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+        Text("- ALL",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+      ],
+    );
+  }
+}
 // class Slider extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
@@ -243,7 +248,7 @@ class _SliderState extends State<Slider> {
       );
     }
     return CarouselSlider(
-      enableInfiniteScroll:false,
+      enableInfiniteScroll: false,
       height: 450.0,
       items: cardList.map<Widget>((i) {
         double percent = i["percent"];

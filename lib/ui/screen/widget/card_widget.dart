@@ -31,36 +31,63 @@ class SlideCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => new DetailPage(
-                  image:
-                      image,
-                  id: id)),
+              builder: (context) => new DetailPage(image: image, id: id)),
         );
       },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        elevation: 0,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Hero(
-              tag: id,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(10),
-                    topRight: const Radius.circular(10)),
-                child: Image(
-                  fit: BoxFit.contain,
-                  image: NetworkImage(
-                      image),
-                ),
-              ),
+      child: Stack(
+        children: <Widget>[
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
             ),
-            Detail(category: category,title: title,percent: percent,dayleft: dayleft,image: image,fund: fund,status: status,detail: detail,)
-          ],
-        ),
+            elevation: 0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Hero(
+                  tag: id,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        topLeft: const Radius.circular(10),
+                        topRight: const Radius.circular(10)),
+                    child: Image(
+                      fit: BoxFit.contain,
+                      image: NetworkImage(image),
+                    ),
+                  ),
+                ),
+                Detail(
+                  category: category,
+                  title: title,
+                  percent: percent,
+                  dayleft: dayleft,
+                  image: image,
+                  fund: fund,
+                  status: status,
+                  detail: detail,
+                )
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            heightFactor: 10,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 75.0,right: 10),
+              child: RawMaterialButton(
+              onPressed: () {},
+              child: new Icon(
+                Icons.play_arrow,
+                color: Colors.white,
+                size: 20.0,
+              ),
+              shape: new CircleBorder(),
+              fillColor: Color(0xff162997),
+              elevation: 0.0,
+            )
+            ),
+          )
+        ],
       ),
     );
   }
@@ -75,7 +102,15 @@ class Detail extends StatelessWidget {
   final String dayleft;
   final String image;
   final String status;
-  Detail({this.category,this.title,this.percent,this.dayleft,this.image,this.fund,this.detail,this.status});
+  Detail(
+      {this.category,
+      this.title,
+      this.percent,
+      this.dayleft,
+      this.image,
+      this.fund,
+      this.detail,
+      this.status});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -97,12 +132,11 @@ class Detail extends StatelessWidget {
               fontsizevalue: 13,
               paddingvalue: 10,
               fontWeightvalue: FontWeight.w200,
-              text:
-                  detail),
+              text: detail),
           DetailLine(
             topLeft: status,
-            topRight: fund+" ETH",
-            bottomLeft: dayleft+" day left",
+            topRight: fund + " ETH",
+            bottomLeft: dayleft + " day left",
             bottomRight: "Collected",
             percent: percent,
             withIcon: true,
